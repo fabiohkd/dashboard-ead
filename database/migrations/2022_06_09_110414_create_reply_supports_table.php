@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('reply_support', function (Blueprint $table) {
 						$table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+						$table->uuid('support_id')->index();
+						$table->uuid('user_id')->nullable();
+						$table->uuid('admin_id')->nullable();
+						$table->text('description');
             $table->timestamps();
-        });
+
+						$table->foreign('support_id')
+									->references('id')
+									->on('supports');
+					});
     }
 
     /**
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('reply_supports');
     }
 };
