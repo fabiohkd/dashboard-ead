@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\Admin\{
 	AdminController,
+    CourseController,
     UserController
 };
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
+	//Course routes
+	Route::resource('/courses', CourseController::class);
+
 	//Admins routes
 	Route::resource('/admins', AdminController::class);
 	Route::put('/admins/{id}/update-image', [AdminController::class, 'uploadFile'])->name('admins.update.image');

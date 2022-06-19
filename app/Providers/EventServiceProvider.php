@@ -4,11 +4,13 @@ namespace App\Providers;
 
 use App\Models\{
 	User,
-	Admin
+	Admin,
+    Course
 };
 use App\Observers\{
 	UserObserver,
-	AdminObserver
+	AdminObserver,
+    CourseObserver
 };
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -37,6 +39,7 @@ class EventServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         Admin::observe(AdminObserver::class);
+				Course::observe(CourseObserver::class);
 
     }
 
