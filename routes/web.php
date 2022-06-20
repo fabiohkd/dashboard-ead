@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\{
 	AdminController,
     CourseController,
+    DashboardController,
     LessonController,
     ModuleController,
     UserController
