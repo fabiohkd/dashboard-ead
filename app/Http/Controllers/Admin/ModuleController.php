@@ -85,7 +85,7 @@ class ModuleController extends Controller
 			if (!$course = $this->courseRepository->findById($courseId)){
 				return back();
 			}
-
+//
 			if (!$module = $this->repository->findById($id)){
 				return back();
 			}
