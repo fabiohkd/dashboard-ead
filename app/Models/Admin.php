@@ -43,6 +43,7 @@ class Admin extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+				'id' => 'string',
     ];
 
 		public $incrementing = false;

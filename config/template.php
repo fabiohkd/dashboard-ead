@@ -22,5 +22,10 @@ return [
 			'url' => '/admin/courses',
 			'icon' => 'fas fa-video'
 		],
+		[
+			'name' => 'Suporte',
+			'url' => '/admin/supports',
+			'icon' => 'fas fa-headset'
+		],
 	]
 ];
