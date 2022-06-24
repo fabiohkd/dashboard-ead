@@ -55,5 +55,3 @@ Route::prefix('admin')->group(function () {
 Route::get('/', function () {
     return view('welcome');
 });
-
-Require __DIR__. '/auth.php';
