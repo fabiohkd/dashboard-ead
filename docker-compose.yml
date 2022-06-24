@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 
 services:
     # image project
@@ -7,15 +7,16 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: especializati/laravel9-app
+        image: fabioribeiroclm/laravel9-app
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
             - ./:/var/www
         depends_on:
             - redis
+            - queue
         networks:
-            - laravel-9
+            - laravel-network
 
     # nginx
     nginx:
@@ -28,29 +29,27 @@ services:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
         networks:
-            - laravel-9
+            - laravel-network
 
     # db mysql
     mysql:
         container_name: ead-mysql
-        image: mysql:5.7.22
+        image: mysql:8.0.28
         restart: unless-stopped
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
-            MYSQL_USER: ${DB_USERNAME}
         volumes:
             - ./.docker/mysql/dbdata:/var/lib/mysql
         ports:
             - "3388:3306"
         networks:
-            - laravel-9
+            - laravel-network
 
     # queue
     queue:
         container_name: ead-queue
-        image: especializati/laravel9-app
+        image: fabioribeiroclm/laravel9-app
         restart: unless-stopped
         command: "php artisan queue:work"
         volumes:
@@ -59,15 +58,15 @@ services:
             - redis
             - app
         networks:
-            - laravel-9
+            - laravel-network
 
     # redis
     redis:
         container_name: ead-redis
         image: redis:latest
         networks:
-            - laravel-9
+            - laravel-network
 
 networks:
-    laravel-9:
+    laravel-network:
         driver: bridge
