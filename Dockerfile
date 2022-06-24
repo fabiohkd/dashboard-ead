@@ -1,6 +1,6 @@
 FROM php:8.1.1-fpm
 
-# Arguments
+# Arguments defined in docker-compose.yml
 ARG user=fabio
 ARG uid=1000
 
@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
 		nodejs \
-		npm
+		npm 
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

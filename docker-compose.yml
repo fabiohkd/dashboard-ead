@@ -3,24 +3,23 @@ version: "3.8"
 services:
     # image project
     app:
-        container_name: ead-laravel-9
+        container_name: fabioribeiroclm-laravel-9
         build:
-            context: .
+            context: ./
             dockerfile: Dockerfile
-        image: fabioribeiroclm/laravel9-app
+        image: fabioribeiroclm/laravel9-ead-admin
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
             - ./:/var/www
         depends_on:
             - redis
-            - queue
         networks:
             - laravel-network
 
     # nginx
     nginx:
-        container_name: ead-nginx
+        container_name: fabioribeiroclm-nginx
         image: nginx:alpine
         restart: unless-stopped
         ports:
@@ -33,9 +32,10 @@ services:
 
     # db mysql
     mysql:
-        container_name: ead-mysql
-        image: mysql:8.0.28
-        restart: unless-stopped
+        container_name: fabioribeiroclm-mysql
+        image: mysql:8.0
+        restart: always
+        command: --authentication_policy=mysql_native_password
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -48,8 +48,11 @@ services:
 
     # queue
     queue:
-        container_name: ead-queue
-        image: fabioribeiroclm/laravel9-app
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        container_name: fabioribeiroclm-queue
+        image: fabioribeiroclm/laravel9-ead-admin
         restart: unless-stopped
         command: "php artisan queue:work"
         volumes:
@@ -62,7 +65,7 @@ services:
 
     # redis
     redis:
-        container_name: ead-redis
+        container_name: fabioribeiroclm-redis
         image: redis:latest
         networks:
             - laravel-network
