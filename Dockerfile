@@ -1,12 +1,7 @@
 FROM php:8.1.1-fpm
 
-<<<<<<< HEAD
 # Arguments defined in docker-compose.yml
 ARG user=fabio
-=======
-# Arguments
-ARG user=carlos
->>>>>>> parent of 7266c5b... Merge branch 'main' of https://github.com/fabiohkd/dashboard-ead into main
 ARG uid=1000
 
 # Install system dependencies
@@ -17,13 +12,9 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-<<<<<<< HEAD
     unzip \
 		nodejs \
 		npm 
-=======
-    unzip
->>>>>>> parent of 7266c5b... Merge branch 'main' of https://github.com/fabiohkd/dashboard-ead into main
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
