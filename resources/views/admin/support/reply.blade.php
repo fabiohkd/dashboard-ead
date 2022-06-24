@@ -4,6 +4,13 @@
 		
 @section('content')
 <div class="w-full">
+	<h1 class="text-1xl text-black pb-3">
+		<a href="{{ route('admins.supports.index') }}" class="bg-white mr-4 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+			<i class="fas fa-arrow-left"></i>
+		</a>
+		Voltar
+	</h1>
+		
 	<div class="bg-white overflow-auto">
 		<!-- component -->
 		<div class="flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">

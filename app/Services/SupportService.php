@@ -13,10 +13,13 @@ class SupportService
 		return $this->repository = $repository;
 	}
 
-	public function getSupports(string $status = 'P')
+	public function getSupports(string $status = 'P', int $page = 1)
 	{
-		$data = $this->repository->getByStatus($status);
-		return convertItemsOfArrayToObject($data);
+		return $this->repository->getByStatus(
+			status: $status, 
+			page: $page
+		);
+		// return convertItemsOfArrayToObject($data);
 	}
 
 	public function getSupport(string $id)

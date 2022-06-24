@@ -14,21 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('supports', function (Blueprint $table) {
-					$table->uuid('id')->primary();
-					$table->uuid('user_id')->index();
-					$table->uuid('lesson_id')->index();
-					$table->enum('status', ['P', 'A', 'C'])->default('P');
-					$table->text('description');
-					$table->timestamps();
+            $table->uuid('id')->primary();
+            $table->uuid('user_id')->index();
+            $table->uuid('lesson_id')->index();
+            $table->enum('status', ['P', 'A', 'C'])->default('P');
+            $table->text('description');
+            $table->timestamps();
 
-					$table->foreign('user_id')
-								->references('id')
-								->on('users');
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users');
 
-					$table->foreign('lesson_id')
-								->references('id')
-								->on('lessons');
-			});
+            $table->foreign('lesson_id')
+                    ->references('id')
+                    ->on('lessons');
+        });
     }
 
     /**

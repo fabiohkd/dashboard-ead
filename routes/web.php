@@ -13,8 +13,11 @@ use App\Http\Controllers\Admin\{
 use Database\Factories\ReplySupportFactory;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->group(function () {
-	//Reply routes
+Route::prefix('admin')
+			->middleware(['auth'])
+			->group(function () {
+
+				//Reply routes
 	Route::post('/support/{id}/reply', [ReplySupportController::class, 'store'])->name('replies.store');
 
 	//Support routes
@@ -55,3 +58,5 @@ Route::prefix('admin')->group(function () {
 Route::get('/', function () {
     return view('welcome');
 });
+
+require __DIR__.'/auth.php';
